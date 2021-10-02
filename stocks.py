@@ -17,10 +17,10 @@ def load_tickers() -> List[str]:
 
 def calculate_buy_opportunity(ticker: str, buy_sell_prices: List[float]) -> BuyOpportunity:
     """
-    Returns the best buying opportunity for the provided ticker given its daily open and close prices.
+    Returns the best buying opportunity for the provided ticker given its daily open and close prices in chronological order.
 
     ticker (str): ticker of interest.
-    buy_sell_prices (List[float]): prices at which the ticker can be bought or sold.
+    buy_sell_prices (List[float]): prices at which the ticker can be bought or sold in chronological order.
     """
     min_price: float = float('inf')
     max_profit: float = 0.0
@@ -51,7 +51,7 @@ def get_buy_opportunity(ticker: str) -> BuyOpportunity:
 
 def get_all_buy_opportunities(tickers: List[str]) -> List[BuyOpportunity]:
     """
-    Returns the best buying opportunities for each provided ticker.
+    Returns the best buying opportunities for each provided ticker concurrently.
 
     tickers (List[str]): tickers of interest.
     """
@@ -63,7 +63,7 @@ def get_all_buy_opportunities(tickers: List[str]) -> List[BuyOpportunity]:
 
 def get_top_buy_opportunites(budget: float, buy_opportunities: List[BuyOpportunity]) -> List[BuyOpportunity]:
     """
-    Returns the best buying opportunities which can be afforded under the given budget.
+    Returns the best buying opportunities which can be afforded under the given budget in order of profit.
 
     budget (float]): budget in USD.
     buy_opportunities (List[BuyOpportunity]): best buying opportunities for all tickers of interest.
@@ -84,7 +84,7 @@ def get_total_profit(top_buy_opportunities: List[BuyOpportunity]) -> float:
     """
     Returns the total profit made.
 
-    top_buy_opportunities (List[BuyOpportunity]): top buying opportunities under the given budget.
+    top_buy_opportunities (List[BuyOpportunity]): top buying opportunities under the given budget in order of profit.
     """
     total_profit: float = 0.0
 
@@ -100,7 +100,7 @@ def print_buy_opportunites(budget: float, total_profit: float, top_buy_opportuni
 
     budget (float]): budget in USD.
     total_profit (float): total profit made in USD.
-    top_buy_opportunities (List[BuyOpportunity]): top buying opportunities under the given budget.
+    top_buy_opportunities (List[BuyOpportunity]): top buying opportunities under the given budget in order of profit.
     """
     if not top_buy_opportunities:
         print(f"You did not miss any buy opportunities this month for a budget of ${budget}:")
@@ -108,13 +108,13 @@ def print_buy_opportunites(budget: float, total_profit: float, top_buy_opportuni
 
     print(f"Here are the buy opportunities you missed this month with a budget of ${budget}:")
     for top_buy_opportunity in top_buy_opportunities:
-        top_buy_opportunity.print()
+        print(top_buy_opportunity)
     print(f"For a total profit of ${total_profit}.")
 
 
 def explore_buy_opportunities(budget: float) -> None:
     """
-    Explores and outputs on standard output the best buying opportunity one could have
+    Explores and outputs to standard output the best buying opportunity one could have
     made in the last month given a budget.
 
     budget (float]): budget in USD.

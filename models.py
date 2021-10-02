@@ -13,8 +13,8 @@ class BuyOpportunity:
     profit: float
     ticker: str
 
-    def print(self) -> None:
+    def __str__(self) -> str:
         """
-        Prints the buying opportunity.
+        Verbalizes the buying opportunity.
         """
-        print(f"\t-{self.ticker} purchased at ${self.buy_price} for a profit of ${self.profit}.")
+        return f"\t-{self.ticker} purchased at ${self.buy_price} for a profit of ${self.profit}."

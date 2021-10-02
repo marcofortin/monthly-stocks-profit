@@ -1,2 +1,2 @@
-NUM_WORKERS = 1
+NUM_WORKERS = 8
 TICKERS_JSON = "tickers.json"
